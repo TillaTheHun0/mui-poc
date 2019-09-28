@@ -3,28 +3,12 @@
   "name": "mui-poc-now",
   "builds": [
     {
-      "src": "packages/server/routes/**/*.ts",
-      "use": "@now/node"
-    },
-    {
       "src": "packages/app/package.json",
       "use": "@now/next"
     }
   ],
   "public": true,
   "routes": [
-    {
-      "src": "/graphql",
-      "dest": "packages/server/routes/graphql.ts"
-    },
-    {
-      "src": "/healthcheck",
-      "dest": "packages/server/routes/healthcheck.ts"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "packages/server/routes/api.ts"
-    },
     {
       "src": "/(.*)",
       "dest": "packages/app/$1"
