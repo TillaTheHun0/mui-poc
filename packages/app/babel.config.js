@@ -1,0 +1,17 @@
+
+// * only used for styled-components
+module.exports = {
+  presets: ['next/babel'],
+  plugins: [
+    [
+      'styled-components',
+      { ssr: true }
+    ],
+    [
+      'import', {
+        libraryName: 'antd',
+        style: true
+      }
+    ]
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "baseUrl": "../",
+    "jsx": "react",
+    "types": [
+      "react",
+      "react-dom",
+      "jest",
+      "storybook__react",
+      "storybook__addon-knobs",
+      "styled-components",
+      "node"
+    ]
+  },
+  "exclude": [
+    "../node_modules",
+    "**/*.test.tsx"
+  ]
+}

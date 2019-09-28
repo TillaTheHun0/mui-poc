@@ -1,0 +1,41 @@
+{
+  "name": "mui-poc",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "npx lerna run build",
+    "bump": "npx lerna version --conventional-commits --no-push",
+    "postinstall": "npx lerna bootstrap && npx lerna bootstrap --hoist && npx lerna run build",
+    "start": "now dev",
+    "lint": "npx eslint \"**/*.{ts,tsx,js}\"",
+    "storybook": "npx lerna run storybook --stream",
+    "test": "npm run lint && npx jest"
+  },
+  "keywords": [],
+  "author": "Tyler Hall",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@testing-library/jest-dom": "^4.1.0",
+    "@types/jest": "^24.0.18",
+    "@typescript-eslint/eslint-plugin": "^2.3.0",
+    "@typescript-eslint/parser": "^2.3.0",
+    "cypress": "^3.4.1",
+    "eslint": "^6.4.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.1.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "jest-cli": "^24.9.0",
+    "lerna": "^3.16.4",
+    "standard-version": "^7.0.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.3"
+  }
+}
