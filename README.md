@@ -12,6 +12,9 @@ A Web Application demonstrating Modular UI API PoC for fetching content
 
 This will start a dev server with hot module reloading for the client app, as well as hot module reloading for the server.
 
+## The MUI Part
+
+Most of this is just personal boilerplate, but you're probably interested in the MUI part. Go to `packages/mui` for that
 
 ## Tech
 
