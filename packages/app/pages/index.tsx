@@ -7,8 +7,10 @@ import { Button } from 'antd'
 
 import { IMuiClient, MuiProvider } from '@mui-poc/mui'
 
-import { RichText } from '../client/components/RichText'
+import { AuthorableRichText } from '../client/components/Author/AuthorableRichText'
 import { IMuiOperation } from '../client/types/mui'
+
+let someContent = 'some awesome for rich text with uid'
 
 /**
  * * Here is our MuiClient implementation
@@ -20,11 +22,20 @@ const muiClient: IMuiClient<IMuiOperation> = {
     const { variables } = operation
 
     // * simulate a request
-    return await new Promise(resolve => {
-      setTimeout(() => resolve({ text: `some awesome for rich text with uid ${variables.uid}` }), 3000)
-    }) as any
+    return new Promise(resolve => {
+      setTimeout(() => resolve({ text: `${someContent} ${variables.uid}` }), 3000)
+    })
   },
-  store: async () => Promise.resolve({}),
+  store: async (operation) => {
+    const { variables } = operation
+
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve({ text: variables })
+        someContent = variables.text
+      })
+    })
+  },
   isAuthoringMode: () => Promise.resolve(false)
 }
 
@@ -41,9 +52,9 @@ const Index = () => (
         <Button type='primary'>Go to About Page</Button>
       </Link>
 
-      <RichText uid={'myTextUid-1234'} text={'Some Awesome Default'} />
+      <AuthorableRichText uid={'myTextUid-1234'} text={'Some Awesome Default'} />
       <br />
-      <RichText uid={'myTextUid-abcgc'} text={'Some Awesome Seocnd Default'} />
+      <AuthorableRichText uid={'myTextUid-abcgc'} text={'Some Awesome Seocnd Default'} />
     </div>
   </MuiProvider>
 )
