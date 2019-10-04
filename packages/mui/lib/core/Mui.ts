@@ -15,7 +15,7 @@ export type IMuiProviderOptions = any
 export interface IMuiClient<MuiOperation> {
   fetch: (operation: MuiOperation, options: IMuiProviderOptions) => Promise<{}>
   store: (operation: MuiOperation, options: IMuiProviderOptions) => Promise<{}>
-  isAuthoringMode: (operation: MuiOperation) => Promise<boolean>
+  isAuthoringMode: () => Promise<boolean>
 }
 
 export interface IMuiProviderArgs<MuiOperation> {
@@ -49,6 +49,15 @@ export class MuiCoreProvider<MuiOperation, MuiDoResult> {
       const clientRes = await this.client.store(operation, this.options)
       // some Mui thigns here with options
       return dataResultCb(null, clientRes)
+    } catch (err) {
+      return dataResultCb(err, null)
+    }
+  }
+
+  isAuthoring = async (dataResultCb: MuiDoResultCallback<boolean>) => {
+    try {
+      const isAuthoring = await this.client.isAuthoringMode()
+      return dataResultCb(null, isAuthoring)
     } catch (err) {
       return dataResultCb(err, null)
     }

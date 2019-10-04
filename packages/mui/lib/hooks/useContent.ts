@@ -1,35 +1,20 @@
 
-import { useContext, useRef, useReducer } from 'react'
+import { useContext } from 'react'
 
 import { MuiCoreProvider } from '../core/Mui'
-import { MuiData, IMuiDataResult } from '../core/MuiData'
+import { IMuiDataResult } from '../core/MuiData'
 
 import { getMuiContext } from '../components/MuiContext'
 
-import { useDeepMemo } from './useDeepMemo'
+import { useDeepMemo } from './common/useDeepMemo'
+import { useBase } from './common/useBase'
 
 export function useContent<MuiOperation, MuiDataDoResult> (operation: MuiOperation) {
   const muiContext = useContext(getMuiContext())
 
-  /**
-   * * We pass this dispatcher around to force React to re-render
-   * * for example when our data finally loads
-   */
-  const [tick, forceUpdate] = useReducer(x => x + 1, 0)
-
-  // * create mutable ref to store pending MUI operation
-  const muiDataRef = useRef<MuiData<MuiOperation, MuiDataDoResult>>()
-
   const provider = muiContext.provider as MuiCoreProvider<MuiOperation, IMuiDataResult<MuiDataDoResult>>
 
-  if (!muiDataRef.current) {
-    // * set the ref for the first time
-    muiDataRef.current = new MuiData<MuiOperation, MuiDataDoResult>({
-      operation,
-      do: provider.doFetch.bind(provider),
-      forceUpdate
-    })
-  }
+  const { muiDataRef, tick } = useBase(operation, provider.doFetch.bind(provider))
 
   const muiData = useDeepMemo(
     () => muiDataRef.current!.executeDo(),

@@ -27,7 +27,7 @@ export class MuiData<MuiOperation, MuiDataDoResult> implements IMuiDataResult<Mu
   error: any
   data: MuiDataDoResult | null | undefined
 
-  private pendingOperation: Function | undefined
+  private pendingDo: Function | undefined
 
   constructor ({ operation, do: muiDo, forceUpdate }: IMuiData<MuiOperation, MuiDataDoResult>) {
     this.operation = operation
@@ -35,8 +35,8 @@ export class MuiData<MuiOperation, MuiDataDoResult> implements IMuiDataResult<Mu
     this.forceUpdate = forceUpdate
   }
 
-  executeDo (): IMuiDataResult<MuiDataDoResult> {
-    if (!this.pendingOperation) {
+  executeDo (operation?: MuiOperation): IMuiDataResult<MuiDataDoResult> {
+    if (!this.pendingDo) {
       this.loading = true
       this.error = null
       this.data = null
@@ -45,13 +45,13 @@ export class MuiData<MuiOperation, MuiDataDoResult> implements IMuiDataResult<Mu
        * * Set pendingOperation to a function that just invokes
        * * the do, so subsequent calls will not reinvoke the do
        */
-      this.pendingOperation = () =>
+      this.pendingDo = () =>
         this.do(
-          this.operation,
+          operation || this.operation,
           this.dataResultCb.bind(this)
         )
 
-      this!.pendingOperation()
+      this!.pendingDo()
     }
 
     return this
@@ -62,7 +62,7 @@ export class MuiData<MuiOperation, MuiDataDoResult> implements IMuiDataResult<Mu
    * * call to executeDo.
    */
   redo () {
-    delete this.pendingOperation
+    delete this.pendingDo
   }
 
   private dataResultCb: MuiDoResultCallback<IMuiDataResult<MuiDataDoResult>> = async (err, data) => {

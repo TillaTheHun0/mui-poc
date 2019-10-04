@@ -5,7 +5,8 @@ import { MuiCoreProvider } from '../core/Mui'
 
 export interface IMuiContext<MuiOperation> {
   provider?: MuiCoreProvider<MuiOperation, any>
-  // ? some other Mui stuff that needs to be in the context
+  isAuthoring?: boolean
+  // ? some other useful Mui info on the context
 }
 
 let muiContext: React.Context<IMuiContext<any>>
