@@ -1,5 +1,5 @@
 
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 
 import { MuiCoreProvider } from '../core/Mui'
 import { IMuiDataResult } from '../core/MuiData'
@@ -20,6 +20,9 @@ export function useEditor<MuiOperation, MuiDataDoResult> (operation?: MuiOperati
 
   return {
     isAuthoring: muiContext.isAuthoring,
+    // * The MuiEditor Component
+    // @ts-ignore
+    Editor: ({ children, editorComponent }) => (<div onClick={() => editorComponent }>{children}</div>),
     // ? should this be memoized?
     storeContent: (operation?: MuiOperation) =>
       muiDataRef.current!.executeDo(operation)
