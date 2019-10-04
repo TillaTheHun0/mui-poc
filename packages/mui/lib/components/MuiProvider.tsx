@@ -23,6 +23,8 @@ export const MuiProvider: React.FC<IMuiProviderProps<any>> = ({ client, options,
             context = { ...context, provider }
           }
 
+          // TODO: Tyler. How to set isAuthoring here on provider and context?
+
           return (
             <MuiContext.Provider value={context}>
               {children}

@@ -5,8 +5,13 @@ export interface IRichTextProps {
   text?: string
 }
 
+/**
+ * * Our Dumb component that simply accepts content as props
+ */
 export const RichText: React.FC<IRichTextProps> = ({ text }) => {
   return (
-    <div>{text}</div>
+    <div>
+      Awesome Rich Text: {text}
+    </div>
   )
 }

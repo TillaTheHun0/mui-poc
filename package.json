@@ -9,7 +9,7 @@
     "start": "now dev",
     "lint": "npx eslint \"**/*.{ts,tsx,js}\"",
     "storybook": "npx lerna run storybook --stream",
-    "test": "npm run lint && npx jest"
+    "test": "npm run lint && npx jest --passWithNoTests"
   },
   "keywords": [],
   "author": "Tyler Hall",

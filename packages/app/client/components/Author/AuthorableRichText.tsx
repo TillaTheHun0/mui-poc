@@ -5,7 +5,7 @@ import gql from 'graphql-tag'
 
 import { useContent } from '@mui-poc/mui'
 
-import { IMuiOperation } from '../../types/mui'
+import { IMuiOperation } from '../../lib/muiClient'
 
 import { RichText } from '../RichText'
 
@@ -37,9 +37,10 @@ export const AuthorableRichText: React.FC<IRichTextProps> = ({ uid, text }) => {
   text = data ? data.text : text
 
   return (
-    <div>
+    <div style={{ margin: '10px' }}>
+      <h4>Authorable Rich Text</h4>
       Loading: {`${loading}`} <br />
-      err: {error} <br />
+      err: {error && error.message} <br />
       {/* My dumb component here */}
       <RichText text={text} />
     </div>
