@@ -34,7 +34,7 @@
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",
     "lerna": "^3.16.4",
-    "standard-version": "^7.0.0",
+    "standard-version": "^8.0.1",
     "ts-jest": "^24.1.0",
     "typescript": "^3.6.3"
   }
